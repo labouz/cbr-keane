@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Recent Works of Mark T. Keane</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Layla Bouzoubaa" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="assets/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="assets/kunoichi.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Recent Works of Mark T. Keane
+## Foundations &amp; Research in CBR Seminar
+### Layla Bouzoubaa
+### Last Updated: 2021-08-17
+
+---
+
+
+
+
+# Objectives
+
+- Who is Mark T. Keane?
+
+- Understand foundations of sustainable dairy farming research
+
+- Identify key methods in dairy farming CBR system
+
+- Discuss ICCBR 2021 work on counterfactual explanations
+
+
+---
+class: inverse center middle
+
+# Who is this guy?
+
+![](img/keane.png)
+
+---
+class: split-25 white center
+layout: false
+
+row.white[
+# A Cognitive Scientist
+]
+
+.row[
+.split-three[
+.column[.content[
+.center[
+## Professor &amp; Chair
+]
+
+![](img/bio.png)
+
+.red[*14k (Google Scholar)]
+]]
+
+.column[.content[
+## Author
+
+![:scale 80%](img/book.jpeg)
+
+]]
+
+.column[.content[
+## Grows Garlic
+
+![:scale 80%](img/tweet.png) 
+
+]]
+
+]]
+
+???
+Mark Keane is a cognitive computer scientist. HE is Professor and Chair of Computer Science and UCD.14k+ citations (Google Scholar). He an expert in the cognitive sciences - having written several books, like Cognitive Psychology: A Student's Handbook, Advances in the Psychological Thinking. His expertise is also split in the computer sciences - where he focuses on topics like NLP, machine learning, CBR, text analytics and XAI.
+
+---
+
+## References
+
+
+
+- 
+&lt;p&gt;&lt;cite&gt;McSherry, D.
+(2011).
+&amp;ldquo;Conversational case-based reasoning in medical decision making&amp;rdquo;.
+In: &lt;em&gt;Artificial Intelligence in Medicine&lt;/em&gt; 52.2. Artificial Intelligence in Medicine AIME 2009, pp. 59-66.
+ISSN: 0933-3657.
+DOI: &lt;a href="https://doi.org/https://doi.org/10.1016/j.artmed.2011.04.007"&gt;https://doi.org/10.1016/j.artmed.2011.04.007&lt;/a&gt;.
+URL: &lt;a href="https://www.sciencedirect.com/science/article/pii/S0933365711000480"&gt;https://www.sciencedirect.com/science/article/pii/S0933365711000480&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+
+- Richter M.M., Weber R.O. (2013) Conversational CBR. In: Case-Based Reasoning. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-40167-1_20
+
+- Gu, M., Aamodt, A.: Dialog learning in conversational cbr. In: Proceedings ofthe 19th International Florida Artificial Intelligence Research Society Conference,Florida, USA, AAAI Press (2006) 358–363 
+
+- Branting K., Lester J., Mott B. (2004) Dialogue Management for Conversational Case-Based Reasoning. In: Funk P., González Calero P.A. (eds) Advances in Case-Based Reasoning. ECCBR 2004. Lecture Notes in Computer Science, vol 3155. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-540-28631-8_7
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="assets/macros.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
