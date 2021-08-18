@@ -86,6 +86,37 @@ row.white[
 Mark Keane is a cognitive computer scientist. HE is Professor and Chair of Computer Science and UCD.14k+ citations (Google Scholar). He an expert in the cognitive sciences - having written several books, like Cognitive Psychology: A Student's Handbook, Advances in the Psychological Thinking. His expertise is also split in the computer sciences - where he focuses on topics like NLP, machine learning, CBR, text analytics and XAI.
 
 ---
+## Dairy Agriculture
+
+.pull-left[
+- classifier system to predict mastitis in dairy cows
+
+- predict if a cow will become infected or heal within 7 days
+  - end-to-end system using stakeholder input
+  - reasonings included features that are actionable
+  
+- data source: 7 dairy farms across Ireland (2010-2019) ~ 2,300 cows
+
+- model: 
+  - outcome: days until infection
+  - method: gradient boosting classifier
+  - 
+]
+
+.pull-right[
+
+![](img/illness.png)
+]
+???
+Keane's team gave a workshop talk on this paper at this years AAAI conference.
+mastitis = infections in the utter which costs billions in waste 
+rationale:farmers find infection to late due to late to skill thus raising risk in spread/extend length of sickness
+system: end-to-end system using stakeholder input. reasonings include features that are actionable which increases user acceptance. perform at an accuracy level acceptable to stakeholders. feedback received from famers and veterinarians on specific accuracy measures for classifying a healthy milking vs infectious, how much time is needed to communicate to the farmer that a cow is at risk of infection and which features are actually actionable for the farmers and their confidence levels.
+---
+
+---
+
+---
 
 ## References
 
