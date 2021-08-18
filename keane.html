@@ -82,7 +82,7 @@ row.white[
 Mark Keane is a cognitive computer scientist. HE is Professor and Chair of Computer Science and UCD.14k+ citations (Google Scholar). He an expert in the cognitive sciences - having written several books, like Cognitive Psychology: A Student's Handbook, Advances in the Psychological Thinking. His expertise is also split in the computer sciences - where he focuses on topics like NLP, machine learning, CBR, text analytics and XAI.
 
 ---
-## Dairy Agriculture
+## Predicting Sickness in Dairy Cows
 
 .pull-left[
 - classifier system to predict mastitis in dairy cows
@@ -93,10 +93,10 @@ Mark Keane is a cognitive computer scientist. HE is Professor and Chair of Compu
   
 - data source: 7 dairy farms across Ireland (2010-2019) ~ 2,300 cows
 
-- model: 
+- model: gradient boosting classifier
   - outcome: days until infection
-  - method: gradient boosting classifier
-  - 
+  
+- conclusion: even ~70% accuracy would greatly benefit
 ]
 
 .pull-right[
@@ -106,12 +106,63 @@ Mark Keane is a cognitive computer scientist. HE is Professor and Chair of Compu
 ???
 Keane's team gave a workshop talk on this paper at this years AAAI conference.
 mastitis = infections in the utter which costs billions in waste 
-rationale:farmers find infection to late due to late to skill thus raising risk in spread/extend length of sickness
-system: end-to-end system using stakeholder input. reasonings include features that are actionable which increases user acceptance. perform at an accuracy level acceptable to stakeholders. feedback received from famers and veterinarians on specific accuracy measures for classifying a healthy milking vs infectious, how much time is needed to communicate to the farmer that a cow is at risk of infection and which features are actually actionable for the farmers and their confidence levels.
----
+rationale:farmers find infection to late due to lack of skill thus raising risk in spread/extend length of sickness
+system: end-to-end classification system using stakeholder input. reasonings include features that are actionable which increases user acceptance. they also needed to assure that the system performed at an accuracy level acceptable to stakeholders. to do that, they made sure get feedback received from farmers and veterinarians while building the system on specific accuracy measures for classifying a healthy milking vs infectious, how much time is needed to communicate to the farmer that a cow is at risk of infection and which features are actually actionable for the farmers and their confidence levels.
+data: contained details on milking procedures(total amount of milk produced each day) as well as mastitis (how and when the cow was infected)
+
+model: gradient boosting classifier with levels being a healthy milking in the next 7 days or an infected milking
+conclusion: vet also input that even a 12 hour notice could give a farmer enough time to isolate the sick cow
+
+
 
 ---
+## Break it Down
 
+.pull-left[
+
+- In the CBR context
+  - set of analytic tasks - classification
+- Propensity model
+  - predict likelihood that a cow will develop mastitis in the next 7 days
+- Gradient Boosting 
+  - training set - data from 2010-2018
+  - test set - data from 2018-2019
+  - determine which cow belong in each day
+- Use of counterfactuals
+  - *positive class* = prediction that a cow will be infected
+  - use of nearest unlike neighbors
+  - *If cow #42 had an increase of one and a half units with respect to Yield she would be likely to succumb to mastitis.*
+]
+
+.pull-right[
+
+![](img/features.png)
+
+![](img/probs.png)
+]
+???
+here has been work done on predicting illness in cows however none have been coupled with explanations to allow for more actionable decisions. This paper uses counterfactuals to explain the causal importance of a set of features that are both actionable and confidence building as its been shown that people, psychologically, can more naturally understand the causal roles of a feature had it been different.
+
+After data were collected, a propensity model was developed to predict likelihood that a cow will develop mastitis in the next 7 days. for those that aren't familiar with propensity modeling - propensity modeling is a way to identify who or what in your sample are more likely to make a purchase, receive a certain treatment or in this case get infected. it involves calculating probabilities on a subset of the sample that have been "exposed" or present with a known characteristic to the outcome, given a set of confounding variables, on each patient. the point is to eliminate some of the confounding bias for all observed covariates. 
+
+on GB: a machine learning technique for regression, classification and other tasks, which produces a prediction model in the form of an ensemble of weak prediction models, typically decision trees.
+
+counterfactuals: given the binary classification model- the team aimed to derive the positive class - the prediction that a cow will get infected with explanations. they set a constraint on no more than three features - that are actionable (milk yield) and confidence building (SCC)
+
+Comments:
+The methods are a bit unclear - were the propensity scores includes in the model or were the trees split on propensity? 
+
+"pg.68 When these methods can be applied successfully, they are hard to beat." is this a CBR application?
+---
+## Counterfactual Explanations for Time Series Classification
+
+.pull-left[
+
+]
+
+.pull-right[
+![](img/counterfactual_paper.png)
+]
 ---
 
 ## References
@@ -119,19 +170,15 @@ system: end-to-end system using stakeholder input. reasonings include features t
 
 
 - 
-&lt;p&gt;&lt;cite&gt;McSherry, D.
-(2011).
-&amp;ldquo;Conversational case-based reasoning in medical decision making&amp;rdquo;.
-In: &lt;em&gt;Artificial Intelligence in Medicine&lt;/em&gt; 52.2. Artificial Intelligence in Medicine AIME 2009, pp. 59-66.
-ISSN: 0933-3657.
-DOI: &lt;a href="https://doi.org/https://doi.org/10.1016/j.artmed.2011.04.007"&gt;https://doi.org/10.1016/j.artmed.2011.04.007&lt;/a&gt;.
-URL: &lt;a href="https://www.sciencedirect.com/science/article/pii/S0933365711000480"&gt;https://www.sciencedirect.com/science/article/pii/S0933365711000480&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;Ryan, C., C. Guéret, D. Berry, et al.
+(2021).
+&amp;ldquo;Predicting Illness for a Sustainable Dairy Agriculture: Predicting and Explaining the Onset of Mastitis in Dairy Cows&amp;rdquo;.
+In: &lt;em&gt;CoRR&lt;/em&gt; abs/2101.02188.
+eprint: 2101.02188.
+URL: &lt;a href="https://arxiv.org/abs/2101.02188"&gt;https://arxiv.org/abs/2101.02188&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
 
 - Richter M.M., Weber R.O. (2013) Conversational CBR. In: Case-Based Reasoning. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-40167-1_20
 
-- Gu, M., Aamodt, A.: Dialog learning in conversational cbr. In: Proceedings ofthe 19th International Florida Artificial Intelligence Research Society Conference,Florida, USA, AAAI Press (2006) 358–363 
-
-- Branting K., Lester J., Mott B. (2004) Dialogue Management for Conversational Case-Based Reasoning. In: Funk P., González Calero P.A. (eds) Advances in Case-Based Reasoning. ECCBR 2004. Lecture Notes in Computer Science, vol 3155. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-540-28631-8_7
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
