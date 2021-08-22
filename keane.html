@@ -154,17 +154,146 @@ The methods are a bit unclear - were the propensity scores includes in the model
 
 "pg.68 When these methods can be applied successfully, they are hard to beat." is this a CBR application?
 ---
-## Counterfactual Explanations for Time Series Classification
+### Counterfactual Explanations for Time Series Classification
 
 .pull-left[
+- Rationale: predictions made on time series data are opaque in explanations
 
+- Solution: *Native Guide*
+  - model-agnostic, case-based technique to generate counterfactuals
+  - shows how a time series query could change had the system predicted an alternative class
 ]
 
 .pull-right[
 ![](img/counterfactual_paper.png)
 ]
----
 
+???
+
+This paper we proposes an explainable case-based reasoning (XCBR) solution to an XAI problem - explaining time series predictions.
+---
+## Time Series Classification (TSC)
+
+- Examples:
+  - healthcare: look at a patient's timeline to detect potential abnormalities
+  - food spectroscopy: detect differences between food varietals
+- Classification CBR 
+  - dynamic problem (vs. static)
+- case-base: set of usually linearly ordered time sequences.
+  - what is retrieved from a query is a nearest neighbor sequence
+- similarity: 
+  - Euclidean distances
+  - dynamic time warping
+  - longest common sub sequence similarity
+  - probabilistic methods
+  - general transformations
+
+
+???
+before we can delve deeper into native guide, let's talk a little bit about tsc systems.
+food: cheaper sensors since only a small portion of time series is used for discrimintative classification
+
+knowledge container: prediction is one of the most common applications of time series
+case base contains a set of observed time sequences.
+similarity: each measurement of one time series is mapped onto at least one measurement of the other time series and that the mapping preserves the chronological order of the measurements.
+
+DTW: In some time series domains, a very simple distance measure such as the Euclidean
+distance will suffice. However, it is often the case that the two sequences have
+approximately the same overall component shapes, but these shapes do not line up in Xaxis. 
+---
+## Good Counterfactuals for TS
+
+
+.pull-left[
+
+**Generally**
+
+- Causally informative
+- Psychologically effective
+- Legally compliant with GDPR
+
+**For TS**
+- Proximity
+  - how close the to-be-explained query is to the generated counterfactual instance
+  
+- Sparsity
+  - counterfactual instances that change fewer features 
+  - single portion of the time series
+]
+.pull-right[
+
+- Plausibility
+
+- Diversity
+  - a system should be able to produce multiple diverse explanations for a single query case
+
+&lt;br&gt;
+![](img/counterfactual.png)
+]
+
+???
+Generally, these are the traits of good counterfactual explanations
+Keane argues that counterfactual XAI solns for TS are rare and are virtually non-existent for XCBR solns
+proximity: how close the to-be-explained query is to the generated counterfactual instance using some of the distance metrics described
+sparsity- as stated before, it is preferred to have less than 2 features for explanations on psychological grounds. However due to the multi-dimensionality of time series data, this is not possible. it has been proposed that semantically-meaningful/disciminative information is contained in contiguous subsequence of the series, meaning, a single portion of the time series rather than random points in time
+explanations need to plausible as they can be representetive of the underlying data distribution - some suggest that proximity is a good proxy for plausibility
+diversity: a system should be able to produce multiple diverse explanations for a single query case. One advantage of this is that different users may find different explanations helpful
+
+img = examples of implausible counterfactuals that are out of distribution even thought they have high proximity
+
+---
+## Native Guide
+
+Relies on existing instances in the training data and prioritizes candidate solutions that meet the four key properties
+.pull-left[
+**Steps**
+1. retrieve native guide
+  - can guarantee plausibility
+2. adapt native guide to generate counterfactual
+  - the native guide is perturbed towards the to-be-explained query-case
+  - distance between time sequences calculated (DTW)
+  - guarantee sparsity
+![](img/ts-counter-eqn.png)
+]
+
+.pull-right[
+![:scale 80%](img/nun.png)
+![:scale 80%](img/dtw.png)
+]
+
+
+???
+Native Guide relies upon existing instances in the training data, sor nearest unlike neighbors (NUNs), that it retrieves and adapts to generate counterfactual explanations 
+Given a query time series, Tq, find a coun- terfactual instance, T ′ , that exists in the case-base. An example of one such instance is the query’s nearest unlike neighbor (T′ ). In using native counterfactual cases we can guarantee plausibility as it is within the distribution.
+
+step2: to produce more proximate explanatory counterfactual, the native guide is perturbed towards the to-be-explained query-case
+
+DTW - basically acceleration/deceleration of signals along the time dimension - used when you have sequences of possibly different lengths
+
+sparsity is guaranteed in that only semantically-meaningful features perturbed. looking at the equation, using the feature-weights, the method seeks to modify contiguous, subsequences, rather than the whole time series, as follows by looking at the equation.
+weights for the features can be extracted using different techniques. this process is iterative in that small subsequences are analysed until the optimal counteractual is found. 
+This adaptation step improves the proximity and plausibility of the generated coun- terfactuals. then diversity is met since you can extract the next nearest unlikely  neighbor and so forth.
+---
+## Testing Native Guide: 5 datasets
+
+1. 5 datasets
+2. baseline models: *w-counterfactual* &amp; NUN-CF
+3. time-series classifier: fully convo- lutional neural network (FCN)  
+
+Probing for Proximity and Sparsity
+
+![:scale 60%](img/prox-test.png)
+
+
+???
+The w-counterfactual method (w-CF) is a key benchmark method; it is the most cited counterfactual XAI method in the literature
+
+The black-box classifier used was a fully convo- lutional neural network (FCN). enabling explicit comparisons to in-sample counterfactual instance. 
+
+Proximity was evaluated using the relative counterfactual distance. Basically, this measure determines whether the dis- tance between the query and the generated counterfactual is closer than that between the query and its “naturally-occurring” NUN. As in some other studies [21], three distance metrics were used; (i) Manhattan Distance (L1 norm), (ii) Euclidean Distance (L2 norm), and (iii) Chebyshev Distance (l∞ norm).
+
+Comparative tests on diverse datasets from the UCR archive using a fully convolutional neural network, demonstrate that the explanatory counterfactuals produced by Native Guide are significantly better than (i) explanations that already existed in the case-base (from NUN-CF) and (ii) ex- planations produced by constraint-based optimisation techniques (from w-CF).
+---
 ## References
 
 
@@ -177,7 +306,9 @@ In: &lt;em&gt;CoRR&lt;/em&gt; abs/2101.02188.
 eprint: 2101.02188.
 URL: &lt;a href="https://arxiv.org/abs/2101.02188"&gt;https://arxiv.org/abs/2101.02188&lt;/a&gt;.&lt;/cite&gt;&lt;/p&gt;
 
-- Richter M.M., Weber R.O. (2013) Conversational CBR. In: Case-Based Reasoning. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-40167-1_20
+- Richter M.M., Weber R.O. (2013) Complex Similarity Topics. In: Case-Based Reasoning. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-40167-1_20
+
+- Delaney, Greene, Keane, (2021) "Instance-based Counterfactual Explanations for Time Series Classification"
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
